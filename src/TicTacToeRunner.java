@@ -8,6 +8,7 @@ public class TicTacToeRunner
     private static final int ROW = 3;
     private static final int COL = 3;
     private static String[][] board = new String[ROW][COL];
+    private static String messageOption = "";
 
     /**
      * @param args the command line arguments
@@ -23,6 +24,8 @@ public class TicTacToeRunner
         int col = -1;
         final int MOVES_FOR_WIN = 5;
         final int MOVES_FOR_TIE = 7;
+
+
         do // program loop
         {
             //begin a game
@@ -50,7 +53,7 @@ public class TicTacToeRunner
                     if(isWin(player))
                     {
                         display();
-                        System.out.println("Player " + player + " wins!");
+                        messageOption = "Player " + player + " wins!";
                         playing = false;
                     }
                 }
@@ -59,7 +62,7 @@ public class TicTacToeRunner
                     if(isTie())
                     {
                         display();
-                        System.out.println("It's a Tie!");
+                        messageOption = "It's a Tie!";
                         playing = false;
                     }
                 }
@@ -110,7 +113,10 @@ public class TicTacToeRunner
         boolean retVal = false;
         if(board[row][col].equals(" "))
             retVal = true;
-
+        else
+        {
+            messageOption = "You selected a location that is already occupied. Please select a different location.";
+        }
         return retVal;
 
     }

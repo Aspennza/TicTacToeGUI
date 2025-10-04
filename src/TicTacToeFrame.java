@@ -1,8 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 public class TicTacToeFrame extends javax.swing.JFrame
 {
@@ -12,11 +9,12 @@ public class TicTacToeFrame extends javax.swing.JFrame
     JPanel quitPnl;
 
     JLabel titleLbl;
+    JOptionPane messageOpt;
 
     TicTacToeButton[][] board;
     JButton quitBtn;
 
-    public TicTacToeFrame()
+    public TicTacToeFrame(String messageOption)
     {
         super("Tic Tac Toe");
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -28,6 +26,9 @@ public class TicTacToeFrame extends javax.swing.JFrame
         mainPnl.setLayout(new BorderLayout());
         add(mainPnl);
 
+        createTitlePnl();
+        mainPnl.add(titlePnl, BorderLayout.NORTH);
+
         for(int row = 0; row < 3; row++)
         {
             for(int col = 0; col < 3; col++)
@@ -37,7 +38,16 @@ public class TicTacToeFrame extends javax.swing.JFrame
             }
         }
     }
+
+    private void createTitlePnl()
+    {
+        titlePnl = new JPanel();
+        titleLbl = new JLabel("Tic Tac Toe");
+        titlePnl.add(titleLbl);
+    }
 }
+
+//messageOpt = new JOptionPane(messageOption); for the buttons!!
 
 class TicTacToeButton extends JButton
 {
