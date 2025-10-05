@@ -14,6 +14,7 @@ public class TicTacToeRunner
     private static int moveCnt = 0;
     private static final int MOVES_FOR_WIN = 5;
     private static final int MOVES_FOR_TIE = 7;
+    private static boolean playing = true;
 
     /**
      * @param args the command line arguments
@@ -35,6 +36,7 @@ public class TicTacToeRunner
         }
 
         frame.clearBoard();
+        playing = true;
     }
 
     private static boolean isValidMove(int row, int col)
@@ -199,23 +201,24 @@ public class TicTacToeRunner
 
     public static void buttonAction(int row, int col)
     {
-        boolean playing = true;
-
-        if(isValidMove(row, col))
+        if(!playing)
+        {
+            JOptionPane.showMessageDialog(frame, "The game is over. Select Clear Board to replay!");
+        } else if (!isValidMove(row, col))
+        {
+            JOptionPane.showMessageDialog(frame, "This space is already occupied. Please select a different space.");
+        } else
         {
             board[row][col] = player;
             frame.setButton(row, col, player);
             moveCnt++;
-        } else
-        {
-            JOptionPane.showMessageDialog(frame, "This space is already occupied. Please select a different space.");
         }
 
         if(moveCnt >= MOVES_FOR_WIN)
         {
             if(isWin(player))
             {
-                System.out.println("Player " + player + " wins!");
+                JOptionPane.showMessageDialog(frame, "Player" + player + "Wins!");
                 playing = false;
             }
         }
@@ -223,7 +226,7 @@ public class TicTacToeRunner
         {
             if(isTie())
             {
-                System.out.println("It's a Tie!");
+                JOptionPane.showMessageDialog(frame, "The game has come to a tie!");
                 playing = false;
             }
         }
