@@ -17,9 +17,10 @@ public class TicTacToeFrame extends javax.swing.JFrame
     JOptionPane messageOpt;
 
     TicTacToeButton[][] board;
+    String[][] transferBoard;
     JButton quitBtn;
 
-    public TicTacToeFrame(String messageOption)
+    public TicTacToeFrame()
     {
         super("Tic Tac Toe");
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -37,6 +38,19 @@ public class TicTacToeFrame extends javax.swing.JFrame
 
     }
 
+    public String[][] getBoard()
+    {
+        for(int row = 0; row < 3; row++)
+        {
+            for(int col = 0; col < 3; col++)
+            {
+                transferBoard[row][col] = board[row][col].getText();
+            }
+        }
+
+        return transferBoard;
+    }
+
     private void createTitlePnl()
     {
         titlePnl = new JPanel();
@@ -47,6 +61,23 @@ public class TicTacToeFrame extends javax.swing.JFrame
     private void createTicTacToePnl()
     {
         ticTacToePnl = new JPanel();
+        ticTacToePnl.setLayout(new GridLayout(3, 3));
+
+        class ticTacToeBtnListener implements ActionListener
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                if (ae.getSource() instanceof TicTacToeButton selectedButton)
+                {
+                    String buttonText = selectedButton.getText();
+
+                    TicTacToeRunner.updateButton(buttonText, selectedButton.getRow(), selectedButton.getCol());
+
+                    board[selectedButton.getRow()][selectedButton.getCol()].setText(TicTacToeRunner.sendPlayer());
+                }
+            }
+        }
 
         for(int row = 0; row < 3; row++)
         {
@@ -54,37 +85,11 @@ public class TicTacToeFrame extends javax.swing.JFrame
             {
                 board[row][col] = new TicTacToeButton(row, col);
                 board[row][col].setText(" ");
+                ticTacToePnl.add(board[row][col]);
             }
-        }
-
-        class ticTacToeBtnListener implements ActionListener
-        {
-            @Override
-            public void actionPerformed(ActionEvent ae)
-            {
-                if (ae.getSource() instanceof JButton selectedButton)
-                {
-                    String buttonText = selectedButton.getText();
-                }
-            }
-        }
         }
     }
-
-    private boolean isValidMove(int row, int col)
-    {
-        boolean retVal = false;
-        if(board[row][col].getText().equals(" "))
-            retVal = true;
-        else
-        {
-            messageOption = "You selected a location that is already occupied. Please select a different location.";
-        }
-        return retVal;
 }
-
-
-//messageOpt = new JOptionPane(messageOption); for the buttons!!
 
 class TicTacToeButton extends JButton
 {
@@ -106,5 +111,7 @@ class TicTacToeButton extends JButton
         return col;
     }
 }
+
+
 
 

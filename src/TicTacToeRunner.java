@@ -8,7 +8,8 @@ public class TicTacToeRunner
     private static final int ROW = 3;
     private static final int COL = 3;
     private static String[][] board = new String[ROW][COL];
-    private static String messageOption = "";
+    private static TicTacToeFrame frame = new TicTacToeFrame();
+    private static String player;
 
     /**
      * @param args the command line arguments
@@ -18,14 +19,11 @@ public class TicTacToeRunner
         boolean finished = false;
         boolean playing = true;
         Scanner in = new Scanner(System.in);
-        String player = "X";
         int moveCnt = 0;
         int row = -1;
         int col = -1;
         final int MOVES_FOR_WIN = 5;
         final int MOVES_FOR_TIE = 7;
-
-
         do // program loop
         {
             //begin a game
@@ -53,7 +51,7 @@ public class TicTacToeRunner
                     if(isWin(player))
                     {
                         display();
-                        messageOption = "Player " + player + " wins!";
+                        System.out.println("Player " + player + " wins!");
                         playing = false;
                     }
                 }
@@ -62,7 +60,7 @@ public class TicTacToeRunner
                     if(isTie())
                     {
                         display();
-                        messageOption = "It's a Tie!";
+                        System.out.println("It's a Tie!");
                         playing = false;
                     }
                 }
@@ -109,6 +107,13 @@ public class TicTacToeRunner
 
     }
 
+    private static boolean isValidMove(int row, int col)
+    {
+        boolean retVal = false;
+        if(board[row][col].equals(" "))
+            retVal = true;
+
+        return retVal;
 
     }
     private static boolean isWin(String player)
@@ -261,4 +266,15 @@ public class TicTacToeRunner
         // Checked every vector so I know I have a tie
         return true;
     }
+
+    public static void updateButton(String buttonState, int row, int col)
+    {
+        board[row][col] = player;
+    }
+
+    public static String sendPlayer()
+    {
+        return player;
+    }
 }
+
