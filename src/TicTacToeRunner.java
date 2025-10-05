@@ -8,7 +8,6 @@ public class TicTacToeRunner
     private static final int ROW = 3;
     private static final int COL = 3;
     private static String[][] board = new String[ROW][COL];
-    private static TicTacToeFrame frame = new TicTacToeFrame();
     private static String player;
 
     /**
@@ -16,6 +15,7 @@ public class TicTacToeRunner
      */
     public static void main(String[] args)
     {
+        TicTacToeFrame frame = new TicTacToeFrame();
         boolean finished = false;
         boolean playing = true;
         Scanner in = new Scanner(System.in);
@@ -36,8 +36,6 @@ public class TicTacToeRunner
                 // get the move
                 do
                 {
-
-                    display();
                     System.out.println("Enter move for " + player);
                     row = SafeInput.getRangedInt(in,"Enter row ", 1, 3);
                     col = SafeInput.getRangedInt(in,"Enter col ", 1, 3);
@@ -50,7 +48,6 @@ public class TicTacToeRunner
                 {
                     if(isWin(player))
                     {
-                        display();
                         System.out.println("Player " + player + " wins!");
                         playing = false;
                     }
@@ -59,7 +56,6 @@ public class TicTacToeRunner
                 {
                     if(isTie())
                     {
-                        display();
                         System.out.println("It's a Tie!");
                         playing = false;
                     }
@@ -91,20 +87,6 @@ public class TicTacToeRunner
                 board[row][col] = " ";
             }
         }
-    }
-    private static void display()
-    {
-        // shows the Tic Tac Toe game
-        for(int row=0; row < ROW; row++)
-        {
-            System.out.print("| ");
-            for(int col=0; col < COL; col++)
-            {
-                System.out.print(board[row][col] + " | ");
-            }
-            System.out.println();
-        }
-
     }
 
     private static boolean isValidMove(int row, int col)
@@ -267,9 +249,16 @@ public class TicTacToeRunner
         return true;
     }
 
-    public static void updateButton(String buttonState, int row, int col)
+    public static boolean updateButton(int row, int col)
     {
-        board[row][col] = player;
+        if(isValidMove(row, col))
+        {
+            board[row][col] = player;
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     public static String sendPlayer()

@@ -35,20 +35,15 @@ public class TicTacToeFrame extends javax.swing.JFrame
         createTitlePnl();
         mainPnl.add(titlePnl, BorderLayout.NORTH);
 
+        createTicTacToePnl();
+        mainPnl.add(ticTacToePnl, BorderLayout.CENTER);
 
-    }
 
-    public String[][] getBoard()
-    {
-        for(int row = 0; row < 3; row++)
-        {
-            for(int col = 0; col < 3; col++)
-            {
-                transferBoard[row][col] = board[row][col].getText();
-            }
-        }
-
-        return transferBoard;
+        setSize(screenWidth * 3/4, screenHeight * 3/4);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Tic Tac Toe");
+        setVisible(true);
     }
 
     private void createTitlePnl()
@@ -63,6 +58,8 @@ public class TicTacToeFrame extends javax.swing.JFrame
         ticTacToePnl = new JPanel();
         ticTacToePnl.setLayout(new GridLayout(3, 3));
 
+        board = new TicTacToeButton[3][3];
+
         class ticTacToeBtnListener implements ActionListener
         {
             @Override
@@ -70,14 +67,23 @@ public class TicTacToeFrame extends javax.swing.JFrame
             {
                 if (ae.getSource() instanceof TicTacToeButton selectedButton)
                 {
-                    String buttonText = selectedButton.getText();
+                    String player = TicTacToeRunner.sendPlayer();
 
-                    TicTacToeRunner.updateButton(buttonText, selectedButton.getRow(), selectedButton.getCol());
+                    boolean messageYN = TicTacToeRunner.updateButton(selectedButton.getRow(), selectedButton.getCol());
 
-                    board[selectedButton.getRow()][selectedButton.getCol()].setText(TicTacToeRunner.sendPlayer());
+                    if(!messageYN)
+                    {
+                        JOptionPane.showMessageDialog(null,"This space is full. Please select a different space.");
+                    } else {
+                        board[selectedButton.getRow()][selectedButton.getCol()].setText(TicTacToeRunner.sendPlayer());
+                    }
+
+
                 }
             }
         }
+
+        ticTacToeBtnListener listener = new ticTacToeBtnListener();
 
         for(int row = 0; row < 3; row++)
         {
@@ -85,6 +91,7 @@ public class TicTacToeFrame extends javax.swing.JFrame
             {
                 board[row][col] = new TicTacToeButton(row, col);
                 board[row][col].setText(" ");
+                board[row][col].addActionListener(listener);
                 ticTacToePnl.add(board[row][col]);
             }
         }
