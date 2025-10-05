@@ -104,16 +104,9 @@ public class TicTacToeRunner
         return false;
     }
 
-    // checks for a tie before board is filled.
-    // check for the win first to be efficient
-    private static boolean isTie()
+    private static boolean isFullBoardTie()
     {
-        boolean xFlag = false;
-        boolean oFlag = false;
         boolean emptyVal = false;
-        // Check all 8 win vectors for an X and O so
-        // no win is possible
-        // Check for row ties
 
         for(int row=0; row < ROW; row++)
         {
@@ -129,7 +122,24 @@ public class TicTacToeRunner
         if(!emptyVal)
         {
             return true;
+        } else
+        {
+            return false;
         }
+    }
+
+    // checks for a tie before board is filled.
+    // check for the win first to be efficient
+    private static boolean isTie()
+    {
+        boolean xFlag = false;
+        boolean oFlag = false;
+
+        // Check all 8 win vectors for an X and O so
+        // no win is possible
+        // Check for row ties
+
+
 
         for(int row=0; row < ROW; row++)
         {
