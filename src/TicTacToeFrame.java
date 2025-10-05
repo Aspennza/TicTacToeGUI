@@ -133,7 +133,10 @@ public class TicTacToeFrame extends javax.swing.JFrame
         });
 
         controlPnl.add(quitBtn);
-        quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
+        quitBtn.addActionListener((ActionEvent ae) -> {
+            JOptionPane.showMessageDialog(null, "You have quit the game.");
+            System.exit(0);
+        });
     }
 }
 
