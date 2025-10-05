@@ -106,11 +106,8 @@ public class TicTacToeFrame extends javax.swing.JFrame
         controlPnl = new JPanel();
         controlPnl.setLayout(new GridLayout(1, 2));
 
-        quitBtn = new JButton("Quit");
         clearBtn = new JButton("Clear Board");
-
-        controlPnl.add(quitBtn);
-        quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
+        quitBtn = new JButton("Quit");
 
         controlPnl.add(clearBtn);
         clearBtn.addActionListener((ActionEvent ae) ->
@@ -124,6 +121,9 @@ public class TicTacToeFrame extends javax.swing.JFrame
             }
             TicTacToeRunner.clearBoard();
         });
+
+        controlPnl.add(quitBtn);
+        quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
     }
 }
 

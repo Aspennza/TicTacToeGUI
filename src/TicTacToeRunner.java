@@ -10,6 +10,7 @@ public class TicTacToeRunner
     private static String[][] board = new String[ROW][COL];
     private static String player;
     private static int moveCnt = 0;
+    private static boolean playing;
 
     /**
      * @param args the command line arguments
@@ -18,18 +19,17 @@ public class TicTacToeRunner
     {
         TicTacToeFrame frame = new TicTacToeFrame();
         boolean finished = false;
-        boolean playing = true;
+
         Scanner in = new Scanner(System.in);
         int row = -1;
         int col = -1;
         final int MOVES_FOR_WIN = 5;
         final int MOVES_FOR_TIE = 7;
-        do // program loop
-        {
-            //begin a game
-            player = "X";
-            playing = true;
-            clearBoard();
+
+        //begin a game
+        player = "X";
+        playing = true;
+
             do  // game loop
             {
                 if(moveCnt >= MOVES_FOR_WIN)
@@ -48,21 +48,7 @@ public class TicTacToeRunner
                         playing = false;
                     }
                 }
-                if(player.equals("X"))
-                {
-                    player = "O";
-                }
-                else
-                {
-                    player = "X";
-                }
-
             }while(playing);
-
-            finished = SafeInput.getYNConfirm(in, "Done Playing? ");
-        }while(!finished);
-
-
     }
 
     public static void clearBoard()
@@ -75,6 +61,8 @@ public class TicTacToeRunner
                 board[row][col] = " ";
             }
         }
+
+        playing = true;
     }
 
     private static boolean isValidMove(int row, int col)
@@ -243,6 +231,16 @@ public class TicTacToeRunner
         {
             board[row][col] = player;
             moveCnt++;
+
+            if(player.equals("X"))
+            {
+                player = "O";
+            }
+            else
+            {
+                player = "X";
+            }
+
             return true;
         } else
         {
