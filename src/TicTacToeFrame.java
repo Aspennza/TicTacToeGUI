@@ -3,9 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//Come back to working on the action listener
-//Come back to prof. wulf's 2nd lecture at 30 mins in
-
 public class TicTacToeFrame extends javax.swing.JFrame
 {
     JPanel mainPnl;
@@ -86,20 +83,6 @@ public class TicTacToeFrame extends javax.swing.JFrame
                 if (ae.getSource() instanceof TicTacToeButton selectedButton)
                 {
                     TicTacToeRunner.buttonAction(selectedButton.getRow(), selectedButton.getCol());
-//                    String player = TicTacToeRunner.sendPlayer();
-//
-//                    boolean messageYN = TicTacToeRunner.updateButton(selectedButton.getRow(), selectedButton.getCol());
-//
-//                    if(!messageYN && TicTacToeRunner.sendPlaying())
-//                    {
-//                        JOptionPane.showMessageDialog(null,"This space is full. Please select a different space.");
-//                    } else if (!TicTacToeRunner.sendPlaying())
-//                    {
-//                        JOptionPane.showMessageDialog(null, "The game is finished! Please select Clear Board to replay.");
-//                    } else
-//                    {
-//                        board[selectedButton.getRow()][selectedButton.getCol()].setText(player);
-//                    }
                 }
             }
         }
@@ -127,11 +110,7 @@ public class TicTacToeFrame extends javax.swing.JFrame
         quitBtn = new JButton("Quit");
 
         controlPnl.add(clearBtn);
-        clearBtn.addActionListener((ActionEvent ae) ->
-        {
-            TicTacToeRunner.clearBoard();
-            JOptionPane.showMessageDialog(null, "Click Play Again to clear the board and play the game again!");
-        });
+        clearBtn.addActionListener((ActionEvent ae) -> TicTacToeRunner.clearBoard());
 
         controlPnl.add(quitBtn);
         quitBtn.addActionListener((ActionEvent ae) -> {
