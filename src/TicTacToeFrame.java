@@ -11,7 +11,7 @@ public class TicTacToeFrame extends javax.swing.JFrame
     JPanel mainPnl;
     JPanel titlePnl;
     JPanel ticTacToePnl;
-    JPanel quitPnl;
+    JPanel controlPnl;
 
     JLabel titleLbl;
     JOptionPane messageOpt;
@@ -19,6 +19,7 @@ public class TicTacToeFrame extends javax.swing.JFrame
     TicTacToeButton[][] board;
     String[][] transferBoard;
     JButton quitBtn;
+    JButton clearBtn;
 
     public TicTacToeFrame()
     {
@@ -37,6 +38,9 @@ public class TicTacToeFrame extends javax.swing.JFrame
 
         createTicTacToePnl();
         mainPnl.add(ticTacToePnl, BorderLayout.CENTER);
+
+        createControlPnl();
+        mainPnl.add(controlPnl, BorderLayout.SOUTH);
 
 
         setSize(screenWidth * 3/4, screenHeight * 3/4);
@@ -97,14 +101,29 @@ public class TicTacToeFrame extends javax.swing.JFrame
         }
     }
 
-    private void createQuitPnl()
+    private void createControlPnl()
     {
-        quitPnl = new JPanel();
+        controlPnl = new JPanel();
+        controlPnl.setLayout(new GridLayout(1, 2));
+
         quitBtn = new JButton("Quit");
+        clearBtn = new JButton("Clear Board");
 
-        quitPnl.add(quitBtn);
-
+        controlPnl.add(quitBtn);
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
+
+        controlPnl.add(clearBtn);
+        clearBtn.addActionListener((ActionEvent ae) ->
+        {
+            for(int row = 0; row < 3; row++)
+            {
+                for(int col = 0; col < 3; col++)
+                {
+                    board[row][col].setText(" ");
+                }
+            }
+            TicTacToeRunner.clearBoard();
+        });
     }
 }
 
