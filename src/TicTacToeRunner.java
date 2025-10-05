@@ -139,8 +139,6 @@ public class TicTacToeRunner
         // no win is possible
         // Check for row ties
 
-
-
         for(int row=0; row < ROW; row++)
         {
             if(board[row][0].equals("X") ||
@@ -252,9 +250,13 @@ public class TicTacToeRunner
         }
         if(moveCnt >= MOVES_FOR_TIE)
         {
+            if(isFullBoardTie())
+            {
+                JOptionPane.showMessageDialog(frame ,"The game has tied! The board is full.");
+            }
             if(isTie())
             {
-                JOptionPane.showMessageDialog(frame, "The game has come to a tie!");
+                JOptionPane.showMessageDialog(frame, "The game has come to a tie before the board is full!");
                 playing = false;
             }
         }

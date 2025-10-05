@@ -123,13 +123,14 @@ public class TicTacToeFrame extends javax.swing.JFrame
         controlPnl = new JPanel();
         controlPnl.setLayout(new GridLayout(1, 2));
 
-        clearBtn = new JButton("Clear Board");
+        clearBtn = new JButton("Play Again");
         quitBtn = new JButton("Quit");
 
         controlPnl.add(clearBtn);
         clearBtn.addActionListener((ActionEvent ae) ->
         {
             TicTacToeRunner.clearBoard();
+            JOptionPane.showMessageDialog(null, "Click Play Again to clear the board and play the game again!");
         });
 
         controlPnl.add(quitBtn);
