@@ -108,16 +108,7 @@ public class TicTacToeRunner
         }
 
     }
-    private static boolean isValidMove(int row, int col)
-    {
-        boolean retVal = false;
-        if(board[row][col].equals(" "))
-            retVal = true;
-        else
-        {
-            messageOption = "You selected a location that is already occupied. Please select a different location.";
-        }
-        return retVal;
+
 
     }
     private static boolean isWin(String player)
