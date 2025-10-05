@@ -14,10 +14,8 @@ public class TicTacToeFrame extends javax.swing.JFrame
     JPanel controlPnl;
 
     JLabel titleLbl;
-    JOptionPane messageOpt;
 
     TicTacToeButton[][] board;
-    String[][] transferBoard;
     JButton quitBtn;
     JButton clearBtn;
 
@@ -50,6 +48,22 @@ public class TicTacToeFrame extends javax.swing.JFrame
         setVisible(true);
     }
 
+    public void clearBoard()
+    {
+        for(int row = 0; row < 3; row++)
+        {
+            for(int col = 0; col < 3; col++)
+            {
+                board[row][col].setText(" ");
+            }
+        }
+    }
+
+    public void setButton(int row, int col, String player)
+    {
+        board[row][col].setText(player);
+    }
+
     private void createTitlePnl()
     {
         titlePnl = new JPanel();
@@ -71,18 +85,21 @@ public class TicTacToeFrame extends javax.swing.JFrame
             {
                 if (ae.getSource() instanceof TicTacToeButton selectedButton)
                 {
-                    String player = TicTacToeRunner.sendPlayer();
-
-                    boolean messageYN = TicTacToeRunner.updateButton(selectedButton.getRow(), selectedButton.getCol());
-
-                    if(!messageYN)
-                    {
-                        JOptionPane.showMessageDialog(null,"This space is full. Please select a different space.");
-                    } else {
-                        board[selectedButton.getRow()][selectedButton.getCol()].setText(TicTacToeRunner.sendPlayer());
-                    }
-
-
+                    TicTacToeRunner.buttonAction(selectedButton.getRow(), selectedButton.getCol());
+//                    String player = TicTacToeRunner.sendPlayer();
+//
+//                    boolean messageYN = TicTacToeRunner.updateButton(selectedButton.getRow(), selectedButton.getCol());
+//
+//                    if(!messageYN && TicTacToeRunner.sendPlaying())
+//                    {
+//                        JOptionPane.showMessageDialog(null,"This space is full. Please select a different space.");
+//                    } else if (!TicTacToeRunner.sendPlaying())
+//                    {
+//                        JOptionPane.showMessageDialog(null, "The game is finished! Please select Clear Board to replay.");
+//                    } else
+//                    {
+//                        board[selectedButton.getRow()][selectedButton.getCol()].setText(player);
+//                    }
                 }
             }
         }
@@ -112,13 +129,6 @@ public class TicTacToeFrame extends javax.swing.JFrame
         controlPnl.add(clearBtn);
         clearBtn.addActionListener((ActionEvent ae) ->
         {
-            for(int row = 0; row < 3; row++)
-            {
-                for(int col = 0; col < 3; col++)
-                {
-                    board[row][col].setText(" ");
-                }
-            }
             TicTacToeRunner.clearBoard();
         });
 
