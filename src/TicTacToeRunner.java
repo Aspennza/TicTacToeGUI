@@ -110,9 +110,27 @@ public class TicTacToeRunner
     {
         boolean xFlag = false;
         boolean oFlag = false;
+        boolean emptyVal = false;
         // Check all 8 win vectors for an X and O so
         // no win is possible
         // Check for row ties
+
+        for(int row=0; row < ROW; row++)
+        {
+            for(int col=0; col < COL; col++)
+            {
+                if(board[row][col].equals(" "))
+                {
+                    emptyVal = true;
+                }
+            }
+        }
+
+        if(!emptyVal)
+        {
+            return true;
+        }
+
         for(int row=0; row < ROW; row++)
         {
             if(board[row][0].equals("X") ||
