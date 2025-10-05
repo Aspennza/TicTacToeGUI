@@ -96,6 +96,16 @@ public class TicTacToeFrame extends javax.swing.JFrame
             }
         }
     }
+
+    private void createQuitPnl()
+    {
+        quitPnl = new JPanel();
+        quitBtn = new JButton("Quit");
+
+        quitPnl.add(quitBtn);
+
+        quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
+    }
 }
 
 class TicTacToeButton extends JButton
