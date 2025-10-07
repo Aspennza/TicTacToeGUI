@@ -1,8 +1,5 @@
 import javax.swing.*;
 
-//write javadoc
-//make UML diagram
-
 /**
  * Contains all the program logic for running the TicTacToeFrame object, including logging move locations,
  * testing for wins, and testing for ties.
